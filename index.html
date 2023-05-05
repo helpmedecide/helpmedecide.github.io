@@ -89,6 +89,20 @@
                 </script>
                 <script>
                     function sendEmail() {
+
+                        // Get the meta tags on the page
+                        var metaTags = document.getElementsByTagName('meta');
+
+// Loop through the meta tags to find the og:image tag
+                        for (var i = 0; i < metaTags.length; i++) {
+                            if (metaTags[i].getAttribute('property') === 'og:image') {
+                                var imageUrl = metaTags[i].getAttribute('content');
+                                // Do something with the image URL (e.g. display it on the page)
+                                break;
+                            }
+                        }
+
+
                         var message = 'React to this item with an emoji or reply?\n' +
                             String.fromCodePoint(0x1F60D) +
                             String.fromCodePoint(0x000000A0) +
