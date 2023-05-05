@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Bootstrap Page</title>
+    <title>One (1) 12oz can of 'New Coke' unopened by Coca-Cola</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -63,18 +63,46 @@
             </div>
             <div class="modal-body">
                 <p>Would you like to share this page with a friend?</p>
-                <p><strong>Current URL:</strong> <a href="#">{{ window.location.href }}</a></p>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Share</button>
-                <button type="button" class="btn btn-primary" onclick="sendSMS()">Ask for your friends' votes</button>
+                <button type="button" class="btn btn-primary" onclick="sendEmail()">Email: Ask for your friends' votes</button>
+                <button type="button" class="btn btn-primary" onclick="sendSMS()">Text: Ask for your friends' votes</button>
 
 
                 <script>
                     function sendSMS() {
-                        var message = 'React to this item with an emoji?\n' + String.fromCodePoint(0x1F60D) + String.fromCodePoint(0x000000A0) + String.fromCodePoint(0x1F914) + String.fromCodePoint(0x000000A0) + String.fromCodePoint(0x1F641) + '\n\nHelp me decide on this product: \n' + window.location.href;
+                        var message = 'React to this item with an emoji?\n' +
+                            String.fromCodePoint(0x1F60D) +
+                            String.fromCodePoint(0x000000A0) +
+                            String.fromCodePoint(0x1F914) +
+                            String.fromCodePoint(0x000000A0) +
+                            String.fromCodePoint(0x1F641) +
+                            '\n\nHelp me decide on this product: ' +
+                            document.title +
+                            '\n' +
+                            window.location.href;
                         window.location.href = "sms:&body=" + encodeURIComponent(message);
+                    }
+                </script>
+                <script>
+                    function sendEmail() {
+                        var message = 'React to this item with an emoji or reply?\n' +
+                            String.fromCodePoint(0x1F60D) +
+                            String.fromCodePoint(0x000000A0) +
+                            String.fromCodePoint(0x1F914) +
+                            String.fromCodePoint(0x000000A0) +
+                            String.fromCodePoint(0x1F641) +
+                            '\n\nHelp me decide on this product: ' +
+                            document.title +
+                            '\n\n' +
+                            window.location.href +
+                            '\n\n Presented from: \nHelp Me Decide \nby PollCart USA \nhelpmedecide.us'
+                        ;
+                        var subject = 'Help me decide: ' + document.title + ' from ' + location.hostname;
+                        var emailLink = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(message);
+                        window.location.href = emailLink;
                     }
                 </script>
             </div>
